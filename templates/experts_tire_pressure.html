@@ -1,0 +1,78 @@
+<!-- templates/experts_tire_pressure.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expert Tire Pressure Calculator — Bike 4 All</title>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/controls/OrbitControls.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet"/>
+  <style>
+    /* reuse index.html styles */
+    body { margin:0; overflow-x:hidden; background: radial-gradient(circle at center, #0a0f2c, #01030a); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
+    canvas { position:fixed; top:0; left:0; z-index:0; }
+    .content { position:relative; z-index:10; padding-top:80px; }
+    .brand { text-transform:uppercase; font-weight:300; font-size:clamp(2rem,8vw,5rem); letter-spacing:.02em; }
+    .logo { position:fixed; top:20px; left:20px; z-index:20; }
+    .logo img { height:60px; }
+    @media (min-width:768px){ .logo img{height:120px;} body{overflow-x:hidden;} }
+    .bikepath-container { position:fixed; bottom:0; left:0; right:0; z-index:5; width:100%; pointer-events:none; opacity:0.3; }
+    .btn { @apply inline-block bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition; }
+  </style>
+</head>
+<body class="text-white">
+  <canvas id="bg"></canvas>
+
+  <div class="logo">
+    <a href="/"><img src="/static/bike4all_logo.png" alt="Bike 4 All Logo"></a>
+  </div>
+
+  <div class="content flex flex-col items-center justify-start min-h-screen px-4 py-0 text-center max-w-md mx-auto">
+    <h1 class="brand mb-4">Expert Tire Pressure Calculator</h1>
+
+    <p class="text-gray-300 mb-6 leading-relaxed" style="max-width:28rem;">
+      {{ explanation|safe }}
+    </p>
+
+    {% if result %}
+      <p class="text-xl text-gray-100 mb-2 font-bold">
+        Optimal pressure: {{ result.pressure_bar }} bar
+      </p>
+      <p class="text-gray-200 mb-4 text-sm">
+        Contact patch: {{ result.contact_area_cm2 }} cm²<br>
+        Tire volume: {{ result.tire_volume_l }} L
+      </p>
+      <div class="flex gap-4">
+        <a href="/experts/tire_pressure" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Re-calculate</a>
+        <a href="/experts" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">← Choose Model</a>
+      </div>
+    {% else %}
+      <form method="post" class="space-y-4 w-full">
+        <label class="block text-left">
+          <span class="text-gray-300">Rider + bike weight (kg):</span>
+          <input name="weight" type="number" step="0.5" min="0" required class="mt-1 block w-full rounded-md bg-gray-800 text-white p-2"/>
+        </label>
+        <label class="block text-left">
+          <span class="text-gray-300">Tire width (mm):</span>
+          <input name="tire_width" type="number" step="1" min="0" required class="mt-1 block w-full rounded-md bg-gray-800 text-white p-2"/>
+        </label>
+        <label class="block text-left">
+          <span class="text-gray-300">Wheel diameter (mm):</span>
+          <input name="wheel_diameter" type="number" step="1" min="0" required class="mt-1 block w-full rounded-md bg-gray-800 text-white p-2"/>
+        </label>
+        <button type="submit" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Calculate Pressure</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <div class="bikepath-container">
+    <img src="/static/bikepath_silhouette.png" alt="Bike Path" class="bikepath"/>
+  </div>
+
+  <script>
+    // three.js script here
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!-- templates/experts_overview.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expert Models – Bike 4 All</title>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/controls/OrbitControls.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; overflow-x: hidden; background: radial-gradient(circle at center, #0a0f2c, #01030a); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    canvas { position: fixed; top: 0; left: 0; z-index: 0; }
+    .logo { position: fixed; top: 20px; left: 20px; z-index: 20; }
+    .logo img { height: 60px; }
+    @media (min-width: 768px) { .logo img { height: 120px; } body { overflow-x: hidden; } }
+    .bikepath-container { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5; width: 100%; pointer-events: none; opacity: 0.3; }
+    .bikepath { width: 100%; height: auto; display: block; }
+    .btn-primary { @apply bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition; }
+  </style>
+</head>
+<body class="text-white">
+  <canvas id="bg"></canvas>
+
+  <div class="logo z-20">
+    <a href="/"><img src="/static/bike4all_logo.png" alt="Bike 4 All Logo"></a>
+  </div>
+
+  <div class="content relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 space-y-12 max-w-3xl mx-auto text-center">
+    <h1 class="brand text-4xl md:text-6xl lg:text-7xl font-light uppercase tracking-widest">Expert Models</h1>
+
+    <!-- Model-Specific Cards -->
+    <div class="w-full space-y-8">
+      <!-- Pure Kinematic Model -->
+      <div class="bg-gray-900 bg-opacity-60 rounded-2xl p-6 shadow-lg">
+        <h2 class="text-2xl font-semibold mb-2">Pure Kinematic Model</h2>
+        <p class="text-gray-300 mb-1"><strong>Problem:</strong> Quickly estimating speed from gear ratio and cadence can be tedious.</p>
+        <p class="text-gray-300 mb-4"><strong>Solution:</strong> Use wheel circumference × cadence × gear ratio for an instant km/h calculation.</p>
+        <a href="/experts/pure_kinematic" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Try Pure Kinematic Model →</a>
+      </div>
+
+      <!-- Gear-Inch Model -->
+      <div class="bg-gray-900 bg-opacity-60 rounded-2xl p-6 shadow-lg">
+        <h2 class="text-2xl font-semibold mb-2">Gear-Inch Model</h2>
+        <p class="text-gray-300 mb-1"><strong>Problem:</strong> Converting traditional gear-inch values into real-world speed isn’t straightforward.</p>
+        <p class="text-gray-300 mb-4"><strong>Solution:</strong> Compute gear inches then translate to meters per revolution and speed in km/h.</p>
+        <a href="/experts/gear_inch" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Try Gear-Inch Model →</a>
+      </div>
+
+      <!-- Tire Pressure Optimization Model -->
+      <div class="bg-gray-900 bg-opacity-60 rounded-2xl p-6 shadow-lg">
+        <h2 class="text-2xl font-semibold mb-2">Tire Pressure Optimization</h2>
+        <p class="text-gray-300 mb-1"><strong>Problem:</strong> It’s hard to know the right PSI/bar for your weight and tire size.</p>
+        <p class="text-gray-300 mb-4"><strong>Solution:</strong> Compute optimal pressure = (weight·g)/(estimated contact patch area).</p>
+        <a href="/experts/tire_pressure" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Try Tire Pressure Model →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bikepath-container z-10">
+    <img src="/static/bikepath_silhouette.png" alt="Bike Path" class="bikepath">
+  </div>
+
+  <script>
+    // Copy your starfield animation script here
+  </script>
+</body>
+</html>
