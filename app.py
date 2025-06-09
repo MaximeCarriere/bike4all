@@ -5,6 +5,9 @@ import sympy as sp
 import math
 from experts.gear_inch import compute_speed as compute_gear_inch
 from experts.tire_pressure import compute_pressure
+# At the very top of app.py
+import os
+os.environ.setdefault('FLASK_APP', 'app.py')
 
 
 # Initialize Flask app
